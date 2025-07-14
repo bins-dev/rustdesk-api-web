@@ -1,32 +1,46 @@
 <template>
   <div>
+    <!-- 查询卡片 -->
     <el-card class="list-query" shadow="hover">
       <el-form inline label-width="120px">
-        <el-form-item :label="T('AddressBookManage')">
+        <!-- 地址簿查询条件 -->
+        <el-form-item :label="T('AddressBook')">
           <el-select v-model="listQuery.collection_id" clearable>
+            <!-- 系统默认的地址簿 -->
             <el-option :value="0" :label="T('MyAddressBook')"></el-option>
+            <!-- 用户自定义的地址簿 -->
             <el-option v-for="c in collectionListRes.list" :key="c.id" :label="c.name" :value="c.id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="T('Id')">
+        <!-- 客户端ID查询条件 -->
+        <el-form-item :label="T('ID')">
           <el-input v-model="listQuery.id" clearable></el-input>
         </el-form-item>
+        <!-- 用户名查询条件 -->
         <el-form-item :label="T('Username')">
           <el-input v-model="listQuery.username" clearable></el-input>
         </el-form-item>
+        <!-- 主机名查询条件 -->
         <el-form-item :label="T('Hostname')">
           <el-input v-model="listQuery.hostname" clearable></el-input>
         </el-form-item>
+        <!-- 操作按钮 -->
         <el-form-item>
+          <!-- 查询按钮 -->
           <el-button type="primary" @click="handlerQuery">{{ T('Query') }}</el-button>
+          <!-- 添加按钮 -->
           <el-button type="warning" @click="toAdd">{{ T('Add') }}</el-button>
+          <!-- 批量编辑标签按钮 -->
           <el-button type="primary" @click="showBatchEditTags">{{ T('BatchEditTags') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
+    <!-- 数据表格卡片 -->
     <el-card class="list-body" shadow="hover">
       <el-table :data="listRes.list" v-loading="listRes.loading" border @selection-change="handleSelectionChange">
+        <!-- 选择框数据项 -->
         <el-table-column type="selection" width="50" align="center"></el-table-column>
+        <!-- ID数据项 -->
         <el-table-column prop="id" label="ID" align="center" width="200">
           <template #default="{ row }">
             <div>
@@ -39,39 +53,58 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="collection_id" :label="T('AddressBookManage')" align="center" width="150">
+        <!-- 地址簿数据项 -->
+        <el-table-column prop="collection_id" :label="T('AddressBook')" align="center" width="150">
           <template #default="{ row }">
             <span v-if="row.collection_id === 0">{{ T('MyAddressBook') }}</span>
             <span v-else>{{collectionListRes.list.find(c => c.id === row.collection_id)?.name}}</span>
           </template>
         </el-table-column>
+        <!-- 用户名数据项 -->
         <el-table-column prop="username" :label="T('Username')" align="center" width="150" />
+        <!-- 主机名数据项 -->
         <el-table-column prop="hostname" :label="T('Hostname')" align="center" width="150" />
-        <!--        <el-table-column prop="platform" :label="T('Platform')" align="center" width="120"/>-->
-        <el-table-column prop="tags" :label="T('Tags')" align="center" />
-        <!--        <el-table-column prop="created_at" label="创建时间" align="center"/>-->
-        <!--        <el-table-column prop="updated_at" label="更新时间" align="center"/>-->
+        <!-- 平台数据项 -->
+        <el-table-column prop="platform" :label="T('Platform')" align="center" width="120" />
+        <!-- 设备标签数据项 -->
+        <el-table-column prop="tags" :label="T('Tags')" align="center" width="120" />
+        <!-- 别名数据项 -->
         <el-table-column prop="alias" :label="T('Alias')" align="center" width="150" />
+        <!-- 客户端版本数据项 -->
         <el-table-column prop="peer.version" :label="T('Version')" align="center" width="100" />
+        <!-- 创建时间数据项 -->
+        <el-table-column prop="created_at" :label="T('CreatedAt')" align="center" width="180" />
+        <!-- 更新时间数据项 -->
+        <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center" width="180" />
+        <!-- 哈希数据项 -->
         <el-table-column prop="hash" :label="T('Hash')" align="center" width="150" show-overflow-tooltip />
+        <!-- 操作列 -->
         <el-table-column :label="T('Actions')" align="center" class-name="table-actions" width="600" fixed="right">
           <template #default="{ row }">
+            <!-- 打开APP按钮 -->
             <el-button type="success" @click="connectByClient(row.id)">{{ T('OpenAppLink') }}</el-button>
+            <!-- WebClient按钮 -->
             <el-button v-if="appStore.setting.appConfig.web_client" type="success" @click="toWebClientLink(row)">Web
               Client</el-button>
-            <el-button v-if="appStore.setting.appConfig.web_client" type="primary" @click="toShowShare(row)">{{
-              T('ShareByWebClient') }}</el-button>
+            <!-- 分项按钮 -->
+            <el-button v-if="appStore.setting.appConfig.web_client" type="primary" @click="toShowShare(row)">
+              {{ T('ShareByWebClient') }}
+            </el-button>
+            <!-- 编辑按钮 -->
             <el-button @click="toEdit(row)">{{ T('Edit') }}</el-button>
+            <!-- 删除按钮 -->
             <el-button type="danger" @click="del(row)">{{ T('Delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+    <!-- 分页卡片 -->
     <el-card class="list-page" shadow="hover">
       <el-pagination background layout="prev, pager, next, sizes, jumper" :page-sizes="[10, 20, 50, 100]"
         v-model:page-size="listQuery.page_size" v-model:current-page="listQuery.page" :total="listRes.total">
       </el-pagination>
     </el-card>
+    <!-- 地址簿数据弹窗 -->
     <el-dialog v-model="formVisible" width="800" :title="!formData.row_id ? T('Create') : T('Update')">
       <el-form class="dialog-form" ref="form" :model="formData" label-width="120px">
         <el-form-item :label="T('AddressBookManage')" required prop="collection_id">
@@ -138,16 +171,19 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+    <!-- 分享后的数据信息弹窗 -->
     <el-dialog v-model="shareToWebClientVisible" width="900" :close-on-click-modal="false">
       <shareByWebClient :id="shareToWebClientForm.id" :hash="shareToWebClientForm.hash"
         @cancel="shareToWebClientVisible = false" @success="" />
     </el-dialog>
-    <el-dialog v-model="batchEditTagVisible" width="800">
+    <!-- 批量编辑标签弹窗 -->
+    <el-dialog v-model="batchEditTagVisible" width="500">
       <el-form :model="batchEditTagsFormData" label-width="120px" class="dialog-form">
         <el-form-item :label="T('Tags')" prop="tags">
           <el-select v-model="batchEditTagsFormData.tags" multiple>
             <el-option v-for="item in tagListResForBatchEdit.list" :key="item.name" :label="item.name"
-              :value="item.name"></el-option>
+              :value="item.name">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -179,9 +215,7 @@ const {
   handlerQuery,
   collectionListRes,
   getCollectionList,
-
   del,
-
   formVisible,
   platformList,
   formData,
@@ -192,8 +226,6 @@ const {
   changeCollectionForUpdate,
   getCollectionListForUpdate,
   collectionListResForUpdate,
-  // collectionListQuery,
-
 } = useRepositories('my')
 
 onMounted(getCollectionList)
