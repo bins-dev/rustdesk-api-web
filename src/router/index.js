@@ -2,6 +2,11 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const constantRoutes = [
   {
+    path: "/",
+    name: "RustDesk",
+    redirect: "/my",
+  },
+  {
     path: "/login",
     name: "Login",
     meta: { title: "Login" },
@@ -34,11 +39,6 @@ const constantRoutes = [
 
 export const asyncRoutes = [
   {
-    path: "/",
-    name: "RustDesk",
-    redirect: "/my/info",
-  },
-  {
     path: "/my",
     name: "My",
     redirect: "/my/info",
@@ -59,7 +59,7 @@ export const asyncRoutes = [
       },
       {
         path: "address_book_manage",
-        name: "MyAddressBookManage",
+        name: "MyAddressBookCollection",
         meta: {
           title: "AddressBookManage",
           icon: "Collection" /*keepAlive: true*/,
@@ -74,13 +74,13 @@ export const asyncRoutes = [
       },
       {
         path: "tag",
-        name: "MyTag",
+        name: "MyTagList",
         meta: { title: "Tags", icon: "CollectionTag" /*keepAlive: true*/ },
         component: () => import("@/views/my/tag/index.vue"),
       },
       {
         path: "shareRecord",
-        name: "MyShareRecord",
+        name: "MyShareRecordList",
         meta: { title: "ShareRecord", icon: "Share" /*keepAlive: true*/ },
         component: () => import("@/views/my/share_record/index.vue"),
       },
