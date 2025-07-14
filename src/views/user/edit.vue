@@ -45,7 +45,7 @@
 
 <script setup>
   import { useRoute } from 'vue-router'
-  import { useGetDetail, useSubmit } from '@/views/user/composables/edit'
+  import { useGetDetail, useSubmit } from '@/views/user/components/edit'
   import { ENABLE_STATUS, DISABLE_STATUS } from '@/utils/common_options'
   import { T } from '@/utils/i18n'
 

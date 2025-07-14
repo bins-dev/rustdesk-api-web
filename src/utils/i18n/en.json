@@ -62,8 +62,8 @@
   "Actions": {
     "One": "Actions"
   },
-  "Filter": {
-    "One": "Filter"
+  "Query": {
+    "One": "Query"
   },
   "Add": {
     "One": "Add"
@@ -209,9 +209,6 @@
   "PeerManage": {
     "One": "Peers"
   },
-  "AddressBookManage": {
-    "One": "Address Books"
-  },
   "GroupManage": {
     "One": "Groups"
   },
@@ -339,8 +336,8 @@
   "KeyOveruse": {
     "One": "Key overuse"
   },
-  "Link": {
-    "One": "Link"
+  "OpenAppLink": {
+    "One": "launch App"
   },
   "CopySuccess": {
     "One": "Copy Success"
@@ -400,9 +397,6 @@
   "ToLocal": {
     "One": "To Local"
   },
-  "AddressBookName": {
-    "One": "Address Book Name"
-  },
   "AddRule": {
     "One": "Add Rule"
   },
@@ -430,8 +424,8 @@
   "AddressBook": {
     "One": "Address Book"
   },
-  "AddressBookNameManage": {
-    "One": "Address Book Names"
+  "AddressBookManage": {
+    "One": "Address Book Manage"
   },
   "MyAddressBookTips": {
     "One": "\"My Address Book\" is the default of the system, cannot be modified or deleted"

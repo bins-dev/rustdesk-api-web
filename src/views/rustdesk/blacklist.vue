@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getList">{{ T('Refresh') }}</el-button>
-        <el-button @click="showForm('add')" type="primary">{{ T('Add') }}</el-button>
+        <el-button @click="showForm('add')" type="warning">{{ T('Add') }}</el-button>
         <el-button @click="showForm('delete')" type="danger">{{ T('Delete') }}</el-button>
       </el-form-item>
     </el-form>

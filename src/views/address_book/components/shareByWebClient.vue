@@ -27,7 +27,7 @@
         ></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item v-if="link" :label="T('Link')">
+    <el-form-item v-if="link" :label="T('OpenAppLink')">
       <el-input v-model="link" readonly>
         <template #append>
           <el-button :icon="CopyDocument" @click="copyLink"/>
@@ -68,7 +68,6 @@
     init()
   })
   const init = () => {
-    console.log('init')
     formData.id = props.id
     formData.hash = props.hash
     formData.password = ''

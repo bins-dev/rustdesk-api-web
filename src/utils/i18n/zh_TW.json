@@ -62,8 +62,8 @@
   "Actions": {
     "One": "操作"
   },
-  "Filter": {
-    "One": "篩選"
+  "Query": {
+    "One": "查詢"
   },
   "Add": {
     "One": "新增"
@@ -209,9 +209,6 @@
   "PeerManage": {
     "One": "裝置管理"
   },
-  "AddressBookManage": {
-    "One": "地址簿管理"
-  },
   "GroupManage": {
     "One": "群組管理"
   },
@@ -326,8 +323,8 @@
   "KeyOveruse": {
     "One": "KEY 使用過度"
   },
-  "Link": {
-    "One": "連結"
+  "OpenAppLink": {
+    "One": "打開應用"
   },
   "CopySuccess": {
     "One": "複製成功"
@@ -386,9 +383,6 @@
   "ToLocal": {
     "One": "到本地"
   },
-  "AddressBookName": {
-    "One": "地址簿名稱"
-  },
   "AddressBookCollection": {
     "One": "地址簿集"
   },
@@ -419,8 +413,8 @@
   "AddressBook": {
     "One": "地址簿"
   },
-  "AddressBookNameManage": {
-    "One": "地址簿名稱"
+  "AddressBookManage": {
+    "One": "地址簿管理"
   },
   "MyAddressBookTips": {
     "One": "\"我的地址簿\"是系統預設，不可修改、刪除"
@@ -526,6 +520,12 @@
   },
   "Result": {
     "One": "結果"
+  },
+  "DeviceGroupManage": {
+    "One": "設備組管理"
+  },
+  "Import": {
+    "One": "導入"
   },
   "Drop file here or click to upload": {
     "One": "將檔案拖到這裡，或點擊上傳"
