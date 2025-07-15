@@ -64,7 +64,7 @@ export const asyncRoutes = [
       },
       {
         path: "address_book_manage",
-        name: "MyAddressBookCollection",
+        name: "MyAddressBookManage",
         meta: {
           title: "AddressBookManage",
           icon: "Collection" /*keepAlive: true*/,
@@ -73,19 +73,19 @@ export const asyncRoutes = [
       },
       {
         path: "address_book",
-        name: "MyAddressBookList",
+        name: "MyAddressBook",
         meta: { title: "AddressBooks", icon: "Notebook" /*keepAlive: true*/ },
         component: () => import("@/views/my/address_book/index.vue"),
       },
       {
         path: "tag",
-        name: "MyTagList",
+        name: "MyTag",
         meta: { title: "Tags", icon: "CollectionTag" /*keepAlive: true*/ },
         component: () => import("@/views/my/tag/index.vue"),
       },
       {
         path: "shareRecord",
-        name: "MyShareRecordList",
+        name: "MyShareRecord",
         meta: { title: "ShareRecord", icon: "Share" /*keepAlive: true*/ },
         component: () => import("@/views/my/share_record/index.vue"),
       },
