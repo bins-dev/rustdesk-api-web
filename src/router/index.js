@@ -39,6 +39,11 @@ const constantRoutes = [
 
 export const asyncRoutes = [
   {
+    path: "/",
+    name: "RustDesk",
+    redirect: "/my",
+  },
+  {
     path: "/my",
     name: "My",
     redirect: "/my/info",
